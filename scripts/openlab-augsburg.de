@@ -1,0 +1,5 @@
+#!/bin/bash
+out=$(curl -s --head https://openlab-augsburg.de/)
+
+echo $out | grep "200 OK" > /dev/null \
+     || echo "$out" | head -n1
