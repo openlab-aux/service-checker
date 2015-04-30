@@ -1,0 +1,32 @@
+= Service Checker
+
+Checks if services still work.
+
+    service-checker <scriptfolder> <outfolder>
+
+
+== Interface
+
+Folder `<scriptfolder>`, that contains scripts that are executable.
+
+Each script is called by the checker and returns:
+
+* 0 - if the services it checks works
+* 1 - in any other case
+
+Each script outputs one or more lines of information (about the returncode) to `stdout`.
+Script errors are returned on `stderr`.
+
+
+== Output
+
+All script outputs are saved in `<outfolder>`.
+
+The directory structure is the following:
+
+    /<scriptname>/
+        status
+        information
+
+`status` contains the return value of the script.
+`information` contains the information the script printed to `stdout`.
