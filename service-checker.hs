@@ -9,9 +9,8 @@ import Options.Applicative
 import Filesystem.Path.CurrentOS (encodeString)
 import qualified Data.Text as Text
 
-import Debug.Trace
 import qualified System.Process as Process
-import Control.Concurrent.Async (Async, withAsync, concurrently)
+import Control.Concurrent.Async (withAsync, concurrently)
 import qualified Data.Text.IO as Text
 
 main :: IO ()
@@ -55,23 +54,6 @@ procCollect
     -> IO (ExitCode, Text)
     -- ^ Exit code and stdout
 procCollect cmd args = system' (Process.proc (Text.unpack cmd) (map Text.unpack args))
-
-{-| Run a command line using the shell, retrieving the exit code and stdout as a
-    non-lazy blob of Text
-
-    This command is more powerful than `proc`, but highly vulnerable to code
-    injection if you template the command line with untrusted input
-
-    The command inherits @stderr@ for the current process
--}
-shellCollect
-    :: Text
-    -- ^ Command line
-    -> Shell Text
-    -- ^ Lines of standard input
-    -> IO (ExitCode, Text)
-    -- ^ Exit code and stdout
-shellCollect cmdLine = system' (Process.shell (Text.unpack cmdLine))
 
 system'
     :: Process.CreateProcess

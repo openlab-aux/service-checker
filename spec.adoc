@@ -30,3 +30,10 @@ The directory structure is the following:
 
 `status` contains the return value of the script.
 `information` contains the information the script printed to `stdout`.
+
+
+= Statuspage
+
+Outputs a html statuspage from the service-checker output to stdout.
+
+    statuspage <outfolder>
