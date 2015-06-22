@@ -12,6 +12,7 @@ import qualified Data.Text as T
 import System.Directory
 import Filesystem.Path.CurrentOS (decodeString)
 import qualified System.FilePath as FP
+import System.IO (stdout)
 
 data ServiceInfo = ServiceInfo { sName :: Text
                                , sStatus :: Status
@@ -36,10 +37,7 @@ main = do
                        otherwise -> error . T.unpack $
                          show file ++ " status has bad contents (" ++ x ++ ")")
                    <*> readFile (decodeString file </> "information")
-  BL.writeFile "foo.html" . renderHtml $ statusTable n
-  return ()
-
-  -- print.show $ ServiceInfo (show name) status information
+  BL.hPutStr stdout . renderHtml $ statusTable n
 
 
 statusTable :: [ServiceInfo] -> Html
