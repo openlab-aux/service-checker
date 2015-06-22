@@ -27,7 +27,7 @@ main = do
          (fullDesc <> progDesc "Outputs a html statuspage from the service-checker output to stdout.")
   files <- getDirectoryContents out >>=
              return . map (out FP.</>) . filter (`notElem` [".", ".."])
-  n <- sequence . flip map files $
+  n <- forM files $
           \file -> ServiceInfo
                    <$> pure (T.pack $ FP.takeFileName file)
                    <*> (readFile (decodeString file </> "status")
