@@ -5,7 +5,7 @@ name:                service-checker
 version:             0.1.0.0
 synopsis:            Check the status of services with a simple filesystem interface
 -- description:         
--- license:             
+license:             GPL-3
 license-file:        LICENSE
 author:              Profpatsch @ Openlab Augsburg
 maintainer:          mail@profpatsch.de
@@ -21,11 +21,12 @@ executable service-checker
   -- other-extensions:    
   build-depends:       base
                     ,  text
-                    ,  basic-prelude
+                    ,  basic-prelude == 0.5.*
                     ,  async
+                    ,  blaze-html
                     ,  turtle
                     ,  process
-                    ,  system-filepath
+                  -- ,  system-filepath
                     ,  optparse-applicative
   -- hs-source-dirs:      
   default-language:    Haskell2010

@@ -1,9 +1,10 @@
-{-# LANGUAGE OverloadedStrings #-}
 #!/usr/bin/env runhaskell
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import BasicPrelude
+import BasicPrelude hiding (FilePath, (</>))
 import qualified Prelude as P
+import qualified System.FilePath as FP
 import Turtle
 import Options.Applicative
 import Filesystem.Path.CurrentOS (encodeString)
@@ -33,8 +34,8 @@ execScripts scriptf outf = do
     in do
       mktree sof
       (exCode, inf) <- procCollect (Text.pack $ encodeString script) [] mempty
-      writeFile (sof </> "information") inf
-      writeFile (sof </> "status") $ show.toNbr $ exCode
+      writeFile (encodeString $ sof </> "information") inf
+      writeFile (encodeString $ sof </> "status") $ show.toNbr $ exCode
         where toNbr (ExitSuccess)   = 0
               toNbr (ExitFailure i) = i
 

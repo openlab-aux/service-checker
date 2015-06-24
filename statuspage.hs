@@ -30,13 +30,13 @@ main = do
   n <- forM files $
           \file -> ServiceInfo
                    <$> pure (T.pack $ FP.takeFileName file)
-                   <*> (readFile (decodeString file </> "status")
+                   <*> (readFile (file </> "status")
                      >>= \x -> case x of
                        "0" -> return Success
                        "1" -> return Failure
                        otherwise -> error . T.unpack $
                          show file ++ " status has bad contents (" ++ x ++ ")")
-                   <*> readFile (decodeString file </> "information")
+                   <*> readFile (file </> "information")
   BL.hPutStr stdout . renderHtml $ statusTable n
 
 
