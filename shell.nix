@@ -4,7 +4,7 @@ let
 
   inherit (nixpkgs) pkgs;
 
-  f = { mkDerivation, async, base, basic-prelude, blaze-html
+  f = { mkDerivation, aeson, async, base, basic-prelude, blaze-html
       , optparse-applicative, process, stdenv, text, turtle
       }:
       mkDerivation {
@@ -14,8 +14,8 @@ let
         isLibrary = false;
         isExecutable = true;
         buildDepends = [
-          async base basic-prelude blaze-html optparse-applicative process
-          text turtle
+          aeson async base basic-prelude blaze-html optparse-applicative
+          process text turtle
         ];
         description = "Check the status of services with a simple filesystem interface";
         license = stdenv.lib.licenses.gpl3;
