@@ -34,6 +34,6 @@ The directory structure is the following:
 
 = Statuspage
 
-Outputs a html statuspage from the service-checker output to stdout.
+Outputs a html statuspage and a JSON status info from the service-checker output to pagedirectory.
 
-    statuspage <outfolder>
+    statuspage <outfolder> <pagedirectory>
