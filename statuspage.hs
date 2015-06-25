@@ -1,21 +1,22 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import BasicPrelude
-import qualified Prelude as P
-import Text.Blaze.Html5 as H hiding (map)
-import Text.Blaze (text)
-import Text.Blaze.Html.Renderer.Utf8(renderHtml)
-import qualified Data.ByteString.Lazy as BL
-import Options.Applicative hiding (Success, Failure)
-import qualified Data.Text as T
-import System.Directory
-import Filesystem.Path.CurrentOS (decodeString)
-import qualified System.FilePath as FP
-import System.IO (stdout)
+import           BasicPrelude
+import           Data.Aeson                    (encode)
+import qualified Data.ByteString.Lazy          as BL
+import qualified Data.Text                     as T
+import           Filesystem.Path.CurrentOS     (decodeString)
+import           Options.Applicative           hiding (Failure, Success)
+import qualified Prelude                       as P
+import           System.Directory
+import qualified System.FilePath               as FP
+import           System.IO                     (stdout)
+import           Text.Blaze                    (text)
+import           Text.Blaze.Html.Renderer.Utf8 (renderHtml)
+import           Text.Blaze.Html5              as H hiding (map)
 
-data ServiceInfo = ServiceInfo { sName :: Text
-                               , sStatus :: Status
+data ServiceInfo = ServiceInfo { sName        :: Text
+                               , sStatus      :: Status
                                , sInformation :: Text } deriving (Show)
 
 data Status = Success | Failure deriving (Show, Eq, Enum)
@@ -41,12 +42,10 @@ main = do
 
 
 statusTable :: [ServiceInfo] -> Html
-statusTable sis = docTypeHtml $ do
-  table $ foldl1' (<>) $ map serviceInfoRow sis
+statusTable sis = docTypeHtml $ table $ foldl1' (<>) $ map serviceInfoRow sis
 
 serviceInfoRow :: ServiceInfo -> Html
-serviceInfoRow si = do
-  tr $ do
+serviceInfoRow si = tr $ do
     th.text $ sName si
     td.text.show $ sStatus si
     td.text $ sInformation si

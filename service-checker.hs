@@ -2,17 +2,17 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import BasicPrelude hiding (FilePath, (</>))
-import qualified Prelude as P
-import qualified System.FilePath as FP
-import Turtle
-import Options.Applicative
-import Filesystem.Path.CurrentOS (encodeString)
-import qualified Data.Text as Text
+import           BasicPrelude              hiding (FilePath, (</>))
+import qualified Data.Text                 as Text
+import           Filesystem.Path.CurrentOS (encodeString)
+import           Options.Applicative
+import qualified Prelude                   as P
+import qualified System.FilePath           as FP
+import           Turtle
 
-import qualified System.Process as Process
-import Control.Concurrent.Async (withAsync, concurrently)
-import qualified Data.Text.IO as Text
+import           Control.Concurrent.Async  (concurrently, withAsync)
+import qualified Data.Text.IO              as Text
+import qualified System.Process            as Process
 
 main :: IO ()
 main = do
