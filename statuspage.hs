@@ -10,7 +10,6 @@ import           Options.Applicative           hiding (Failure, Success)
 import qualified Prelude                       as P
 import           System.Directory
 import qualified System.FilePath               as FP
-import           System.IO                     (stdout)
 import           Text.Blaze                    (text)
 import           Text.Blaze.Html.Renderer.Utf8 (renderHtml)
 import           Text.Blaze.Html5              as H hiding (map, object)
