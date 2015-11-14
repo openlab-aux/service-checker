@@ -1,4 +1,4 @@
-{ nixpkgs ? import <nixpkgs> {}, compiler ? "ghc7101" }:
+{ nixpkgs ? import <nixpkgs> {}, compiler ? "default" }:
 
 let
 
@@ -13,7 +13,7 @@ let
         src = ./.;
         isLibrary = false;
         isExecutable = true;
-        buildDepends = [
+        executableHaskellDepends = [
           aeson async base basic-prelude blaze-html optparse-applicative
           process text turtle
         ];
@@ -21,7 +21,11 @@ let
         license = stdenv.lib.licenses.gpl3;
       };
 
-  drv = pkgs.haskell.packages.${compiler}.callPackage f {};
+  haskellPackages = if compiler == "default"
+                       then pkgs.haskellPackages
+                       else pkgs.haskell.packages.${compiler};
+
+  drv = haskellPackages.callPackage f {};
 
 in
 

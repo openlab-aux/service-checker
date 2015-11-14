@@ -12,7 +12,7 @@ import           System.Directory
 import qualified System.FilePath               as FP
 import           Text.Blaze                    (text)
 import           Text.Blaze.Html.Renderer.Utf8 (renderHtml)
-import           Text.Blaze.Html5              as H hiding (map, object)
+import           Text.Blaze.Html5              as H hiding (map, object, main)
 
 data ServiceInfo = ServiceInfo { sName        :: Text
                                , sStatus      :: Status
